@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tubuyaki;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TubuyakiListController extends Controller
 {
@@ -14,6 +16,8 @@ class TubuyakiListController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return null;
+        $tubuyakies = Tubuyaki::get()->toJson(JSON_PRETTY_PRINT);
+        // Log::info($tubuyakies);
+        return response($tubuyakies, 500);
     }
 }

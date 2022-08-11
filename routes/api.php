@@ -21,17 +21,15 @@ use App\Http\Controllers\TubuyakiListController;
 //     return $request->user();
 // });
 
+// Route::prefix('tubuyakies')->group(function() {
+//     // Route::get('/list',  TubuyakiListController::class)->name('list');
+// });
+Route::apiResource('tubuyakies', TubuyakiController::class);
 
-Route::apiResource('tubuyaki', TubuyakiController::class);
-
-Route::prefix('tubuyaki')->name('tubuyaki.')->group(function() {
-    Route::get('/list',  TubuyakiListController::class)->name('list');
-});
-
-Route::prefix('image')->name('image.')->controller(ImageController::class)->group(function(){
-    Route::post('/upload',  'upload')->name('upload');
-    Route::get('/show',  'show')->name('show');
-    Route::get('/download',  'download')->name('download');
+Route::prefix('images')->controller(ImageController::class)->group(function(){
+    Route::post('/upload',  'upload');
+    Route::get('/{id}',  'show');
+    Route::get('/download',  'download');
 });
 
 
