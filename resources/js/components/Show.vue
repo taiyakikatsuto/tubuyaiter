@@ -32,22 +32,10 @@
 export default {
     name:"show",
     props: {
-        taskId: String
     },
     data(){
-        return {
-            auth:{
-                email:"",
-                password:""
-            },
-            validationErrors:{},
-            processing:false
-        }
     },
     methods:{
-        async login(){
-            alert('logun');
-        },
     }
 }
 </script>

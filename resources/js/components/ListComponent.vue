@@ -67,6 +67,5 @@
 <script>
     export default {
         name:"list",
-
     }
 </script>

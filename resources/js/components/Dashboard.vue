@@ -1,5 +1,4 @@
 <template>
-    <header-component></header-component>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -8,8 +7,7 @@
                         <h3>Dashboard</h3>
                     </div>
                     <div class="card-body">
-                        <p class="mb-0">You are logged in as <b>user.email</b></p>
-                        <label>一覧 <router-link :to="{name:'list'}">Tubuyaki一覧</router-link></label>
+                        <label><router-link :to="{name:'list'}">Tubuyaki一覧</router-link></label>
                     </div>
                 </div>
             </div>
@@ -22,8 +20,6 @@ export default {
     name:"dashboard",
     data(){
         return {
-            // user:this.$store.state.auth.user
-            user:null
         }
     }
 }

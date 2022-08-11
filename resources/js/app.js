@@ -17,8 +17,6 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import HeaderComponent from "@/components/HeaderComponent.vue";
-app.component('header-componentt', HeaderComponent);
 app.use(Router)
 
 
