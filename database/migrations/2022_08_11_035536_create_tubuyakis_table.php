@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tubuyakis', function (Blueprint $table) {
             $table->id();
+            $table->string('contents', 140);
             $table->timestamps();
         });
     }

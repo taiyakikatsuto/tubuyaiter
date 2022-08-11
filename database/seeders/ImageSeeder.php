@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ImageSeeder extends Seeder
 {
@@ -14,6 +15,18 @@ class ImageSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $table = DB::table('images');
+        $table->truncate();
+
+        $table->insert([
+            // [
+            //     'id' => 1,
+            //     'tubuyaki_id' => 1,
+            //     'file_path' => 'c:\\test\\test.pdf',
+            //     'file_name' => 'test.pdf',
+            //     'created' => now(),
+            //     'modified' => now(),
+            // ],
+         ]);
     }
 }

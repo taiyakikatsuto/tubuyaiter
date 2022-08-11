@@ -17,7 +17,7 @@ class TubuyakiFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'contents' => $this->faker->realText(100),
         ];
     }
 }

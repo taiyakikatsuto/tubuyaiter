@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('tubuyaki_id');
+            $table->string('file_path');
+            $table->string('file_name');
             $table->timestamps();
         });
     }
