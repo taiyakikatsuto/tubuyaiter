@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tubuyaki extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'contents'
+    ];
 }

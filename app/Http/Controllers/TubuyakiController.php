@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use App\Models\Tubuyaki;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TubuyakiController extends Controller
 {
@@ -13,7 +16,9 @@ class TubuyakiController extends Controller
      */
     public function index()
     {
-        //
+        $tubuyakies = Tubuyaki::get()->toJson(JSON_PRETTY_PRINT);
+        // Log::info($tubuyakies);
+        return response($tubuyakies, 200);
     }
 
     /**
@@ -24,7 +29,22 @@ class TubuyakiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $tubuyaki = new Tubuyaki();
+            $tubuyaki->fill($request->all());
+            Log::info($request->all());
+
+            $tubuyaki->saveOrFail();
+
+            return response()->json([
+                "message" => "created"
+            ], 201);
+
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => "failed"
+            ], 500);
+        }
     }
 
     /**
@@ -35,7 +55,9 @@ class TubuyakiController extends Controller
      */
     public function show($id)
     {
-        //
+        $tubuyaki = Tubuyaki::find($id)->toJson(JSON_PRETTY_PRINT);
+        // Log::info($tubuyaki);
+        return response($tubuyaki, 200);
     }
 
     /**
@@ -47,7 +69,22 @@ class TubuyakiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $tubuyaki = Tubuyaki::find($id);
+            $tubuyaki->fill($request->all());
+            Log::info($request->all());
+            $tubuyaki->saveOrFail();
+
+            return response()->json([
+                "message" => "updated"
+            ], 201);
+
+        } catch (Exception $e) {
+            Log::error($e);
+            return response()->json([
+                "message" => "failed"
+            ], 500);
+        }
     }
 
     /**
@@ -58,6 +95,18 @@ class TubuyakiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $tubuyaki = Tubuyaki::find($id);
+            $tubuyaki->delete();
+
+            return response()->json([
+                "message" => "deleted"
+            ], 201);
+
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => "failed"
+            ], 500);
+        }
     }
 }
