@@ -8,12 +8,15 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <router-link :to="{name:'dashboard'}" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
+                            <router-link :to="{name:'dashboard'}" class="nav-link">Topへ</router-link>
                         </li>
                     </ul>
                     <div class="d-flex">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
+                                <router-link :to="{ name: 'create' }"  class="nav-link">
+                                    つぶやく
+                                </router-link>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Taiyaki
                                 </a>
@@ -40,7 +43,7 @@ export default {
     methods:{
         taiyaki(){
             alert('たいやきやいた')
-        }
+        },
     }
 }
 </script>

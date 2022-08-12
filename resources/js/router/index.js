@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router'
 
 const Layout = () => import('@/components/layouts/Default.vue')
 const Dashboard = () => import('@/components/Dashboard.vue')
-const Show = () => import('@/components/Show.vue')
+const Show = () => import('@/components/ShowComponent.vue')
 const Create = () => import('@/components/CreateComponent.vue')
 const List = () => import('@/components/ListComponent.vue')
 
@@ -32,8 +32,9 @@ const routes = [
             },
             {
                 name: "show",
-                path: "/show",
+                path: "/show/:tubuyakiId",
                 component: Show,
+                props: true,
                 meta: {
                     middleware: "guest",
                     title: `Show`

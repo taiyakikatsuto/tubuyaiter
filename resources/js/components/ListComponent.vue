@@ -1,71 +1,52 @@
 <template>
-    <div class="container">
-        <table class="table table-hover">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Content</th>
-                <th scope="col">Person In Charge</th>
-                <th scope="col">Show</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Title1</td>
-                <td>Content1</td>
-                <td>Ichiro</td>
-                <td>
-                    <router-link :to="{name:'show'}"><button class="btn btn-primary">Show</button></router-link>
-                </td>
-                <td>
-                    <button class="btn btn-success">Edit</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Title2</td>
-                <td>Content2</td>
-                <td>Jiro</td>
-                <td>
-                    <button class="btn btn-primary">Show</button>
-                </td>
-                <td>
-                    <button class="btn btn-success">Edit</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Title3</td>
-                <td>Content3</td>
-                <td>Saburo</td>
-                <td>
-                    <button class="btn btn-primary">Show</button>
-                </td>
-                <td>
-                    <button class="btn btn-success">Edit</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <router-link :to="{name:'create'}"><button class="btn btn-primary">create</button></router-link>
+  <div class="container">
+    <div
+      class="row justify-content-center"
+      v-for="(tubuyaki, index) in tubuyakis"
+      :key="index"
+    >
+      <div class="card w-50 mt-2">
+        <div class="card-header d-flex justify-content-between">
+          {{ tubuyaki.id }}
+          <router-link
+            v-bind:to="{ name: 'show', params: { tubuyakiId: tubuyaki.id } }"
+          >
+            <button class="btn btn-primary">編集</button>
+          </router-link>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            {{ tubuyaki.contents }}
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name:"list",
-    }
+export default {
+  name: "list",
+  data: function () {
+    return {
+      tubuyakis: {},
+    };
+  },
+  methods: {
+    getTubuyakies() {
+      axios
+        .get("/api/tubuyakies")
+        .then((res) => {
+          this.tubuyakis = res.data;
+        })
+        .catch((error) => {
+          console.log(error.response);
+          router.push({ name: "list" });
+        });
+    },
+  },
+  mounted() {
+    this.getTubuyakies();
+  },
+};
 </script>

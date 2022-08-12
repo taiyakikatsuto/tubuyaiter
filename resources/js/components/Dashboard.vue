@@ -7,7 +7,7 @@
                         <h3>Dashboard</h3>
                     </div>
                     <div class="card-body">
-                        <label><router-link :to="{name:'list'}">Tubuyaki一覧</router-link></label>
+                        <label><router-link :to="{name:'list'}">一覧</router-link></label>
                     </div>
                 </div>
             </div>

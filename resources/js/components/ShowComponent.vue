@@ -15,7 +15,7 @@
                   class="form-control"
                   name="contents"
                   rows="7"
-                  v-model="contents"
+                  v-model="tubuyaki.contents"
                 >
                 </textarea>
               </div>
@@ -26,14 +26,15 @@
           </div>
           <div class="card-footer text-muted">
             <div class="row">
-              <div class="col-12 d-flex justify-content-center">
-                <router-link :to="{ name: 'list' }">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    @click="createTubuyaki"
-                  >
-                    つぶやく
+              <div class="col-6 d-flex flex-row-reverse">
+                <button class="btn btn-primary" @click="updateTubuyaki">
+                  更新する
+                </button>
+              </div>
+              <div class="col-6 d-flex flex-row">
+                <router-link :to="{ name: 'list' }" @click="deleteTubuyaki">
+                  <button type="button" class="btn btn-primary">
+                    削除する
                   </button>
                 </router-link>
               </div>
@@ -46,22 +47,38 @@
 </template>
 <script>
 export default {
-  name: "create",
+  name: "show",
+  props: {
+    tubuyakiId: String,
+  },
   data: function () {
     return {
-      contents: null,
+      tubuyaki: {},
     };
   },
   methods: {
-    createTubuyaki() {
+    getTubuyaki() {
+      axios.get("/api/tubuyakies/" + this.tubuyakiId).then((res) => {
+        this.tubuyaki = res.data;
+      });
+    },
+    updateTubuyaki() {
       axios
-        .post("/api/tubuyakies", {
-          contents: this.contents,
+        .put("/api/tubuyakies/" + this.tubuyakiId, {
+          contents: this.tubuyaki.contents,
         })
         .then((res) => {
-          alert("つぶやきました");
+          alert("更新しました");
         });
     },
+    deleteTubuyaki() {
+      axios.delete("/api/tubuyakies/" + this.tubuyakiId).then((res) => {
+        alert("削除しました");
+      });
+    },
+  },
+  mounted() {
+    this.getTubuyaki();
   },
 };
 </script>
