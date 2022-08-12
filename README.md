@@ -17,7 +17,7 @@ docker run --rm \
 
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
-sail up　-d
+sail up -d
 
 sail artisan key:generate
 
