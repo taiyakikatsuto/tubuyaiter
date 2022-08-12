@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
 use Exception;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
     /**
+     * ファイルをアップロードする
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -17,22 +20,23 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         try {
-            $files = $request->file("images");
-            foreach($files as $file){
+            $image_pathes = DB::transaction(function () use ($request) {
 
-                $file_name = $file->getClientOriginalName();
-                $file->storeAs('images', $file_name);
+                $result = collect();
+                $files = $request->file("images");
 
-                $image = new Image();
-                $image->tubuyaki_id = 1;
-                $image->file_path = public_path('storage/images/' . $file_name);
-                $image->file_name = $file_name;
-                $image->saveOrFail();
-            }
+                // ファイルごとにストレージ＆DBへ保存
+                foreach ($files as $file) {
+                    $file_name = $file->getClientOriginalName();
+                    $path = Storage::disk("public")->putFileAs('images', $file, $file_name);
+                    $imagePath = "/storage/$path";
+                    $result->push($imagePath);
+                }
+                return $result;
+            });
 
             return response()->json([
-                "message" => "uploaded",
-                "id" => $image->id
+                "imagePathes" => $image_pathes
             ], 201);
 
         } catch (Exception $e) {

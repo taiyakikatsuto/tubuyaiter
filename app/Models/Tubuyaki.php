@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tubuyaki extends Model
 {
@@ -12,4 +13,12 @@ class Tubuyaki extends Model
     protected $fillable = [
         'contents'
     ];
+
+    /**
+     * つぶやきの画像を取得
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

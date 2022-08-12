@@ -21,6 +21,9 @@
               </div>
               <div class="form-group row border-bottom">
                 <label for="title" class="col-sm-3 col-form-label">画像</label>
+                <p v-for="(image, index) in tubuyaki.images" :key="index">
+                    {{ image.file_path }}
+                </p>
               </div>
             </div>
           </div>

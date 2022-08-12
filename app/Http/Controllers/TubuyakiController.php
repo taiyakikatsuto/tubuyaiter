@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Image;
 use App\Models\Tubuyaki;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class TubuyakiController extends Controller
@@ -30,16 +32,25 @@ class TubuyakiController extends Controller
     public function store(Request $request)
     {
         try {
-            $tubuyaki = new Tubuyaki();
-            $tubuyaki->fill($request->all());
-            Log::info($request->all());
+            DB::transaction(function () use ($request) {
 
-            $tubuyaki->saveOrFail();
+                $tubuyaki = new Tubuyaki();
+                $tubuyaki->fill($request->all());
+                Log::info($request->all());
+                $tubuyaki->saveOrFail();
+
+                // 画像が添付されている場合画像も保存する
+                foreach ($request->imagePathes as $image_path) {
+                    $image = new Image();
+                    $image->tubuyaki_id = $tubuyaki->id;
+                    $image->file_path = $image_path;
+                    $image->saveOrFail();
+                }
+            });
 
             return response()->json([
                 "message" => "created"
             ], 201);
-
         } catch (Exception $e) {
             return response()->json([
                 "message" => "failed"
@@ -55,7 +66,9 @@ class TubuyakiController extends Controller
      */
     public function show($id)
     {
-        $tubuyaki = Tubuyaki::find($id)->toJson(JSON_PRETTY_PRINT);
+        $tubuyaki = Tubuyaki::with('images')
+            ->find($id)
+            ->toJson(JSON_PRETTY_PRINT);
         // Log::info($tubuyaki);
         return response($tubuyaki, 200);
     }
@@ -78,7 +91,6 @@ class TubuyakiController extends Controller
             return response()->json([
                 "message" => "updated"
             ], 201);
-
         } catch (Exception $e) {
             Log::error($e);
             return response()->json([
@@ -102,7 +114,6 @@ class TubuyakiController extends Controller
             return response()->json([
                 "message" => "deleted"
             ], 201);
-
         } catch (Exception $e) {
             return response()->json([
                 "message" => "failed"
