@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "71e6f87f-ffa7-4bf3-a7ee-a824c7f175ac",
+		"name": "Tubuyaiter Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22782251"
+	},
+	"item": [
+		{
+			"name": "Tubuyaki List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/tubuyakies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"tubuyakies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Tubuyaki",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/tubuyakies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"tubuyakies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Tubuyaki",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contents\": \"Create by Postman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/tubuyakies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"tubuyakies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Tubuyaki",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contents\": \"Update by Postman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/tubuyakies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"tubuyakies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tubuyaki",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/tubuyakies/50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"tubuyakies",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Images",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": [
+								"zyW0t_qNe/taiyakisokuho_logo.ai",
+								"zyW0t_qNe/スクリーンショット 2022-02-20 13.16.48.png"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/images/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"images",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/images/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"images",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
