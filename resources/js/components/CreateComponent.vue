@@ -88,7 +88,7 @@ export default {
                 return null;
             }
             if (event.target.files.length > 4) {
-                alert("4まいまでだよ");
+                alert("写真は4枚までです");
                 this.imagePathes = [];
                 return null;
             }

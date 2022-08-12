@@ -83,11 +83,22 @@ class TubuyakiController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $tubuyaki = Tubuyaki::find($id);
-            $tubuyaki->fill($request->all());
-            $tubuyaki->is_edited = true;
-            Log::info($request->all());
-            $tubuyaki->saveOrFail();
+            DB::transaction(function () use ($request, $id) {
+
+                $tubuyaki = Tubuyaki::find($id);
+                $tubuyaki->fill($request->all());
+                $tubuyaki->is_edited = true;
+                Log::info($request->all());
+                $tubuyaki->saveOrFail();
+
+                // 画像が添付されている場合画像も保存する
+                foreach ($request->imagePathes as $image_path) {
+                    $image = new Image();
+                    $image->tubuyaki_id = $tubuyaki->id;
+                    $image->file_path = $image_path;
+                    $image->saveOrFail();
+                }
+            });
 
             return response()->json([
                 "message" => "updated"
