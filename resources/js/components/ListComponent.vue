@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center" v-for="(tubuyaki, index) in tubuyakis" :key="index">
-            <div class="card w-50 mt-2">
+            <div class="card w-50 mb-2">
                 <div class="card-header d-flex justify-content-between">
                     <div>
                         {{ tubuyaki.id }}

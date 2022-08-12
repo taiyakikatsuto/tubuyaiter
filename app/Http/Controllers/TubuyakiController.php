@@ -40,7 +40,7 @@ class TubuyakiController extends Controller
                 $tubuyaki->saveOrFail();
 
                 // 画像が添付されている場合画像も保存する
-                foreach ($request->imagePathes as $image_path) {
+                foreach ($request->imagePathes ?? [] as $image_path) {
                     $image = new Image();
                     $image->tubuyaki_id = $tubuyaki->id;
                     $image->file_path = $image_path;
@@ -51,7 +51,9 @@ class TubuyakiController extends Controller
             return response()->json([
                 "message" => "created"
             ], 201);
+
         } catch (Exception $e) {
+            Log::error($e);
             return response()->json([
                 "message" => "failed"
             ], 500);
@@ -92,7 +94,7 @@ class TubuyakiController extends Controller
                 $tubuyaki->saveOrFail();
 
                 // 画像が添付されている場合画像も保存する
-                foreach ($request->imagePathes as $image_path) {
+                foreach ($request->imagePathes ?? [] as $image_path) {
                     $image = new Image();
                     $image->tubuyaki_id = $tubuyaki->id;
                     $image->file_path = $image_path;
@@ -103,6 +105,7 @@ class TubuyakiController extends Controller
             return response()->json([
                 "message" => "updated"
             ], 201);
+
         } catch (Exception $e) {
             Log::error($e);
             return response()->json([
