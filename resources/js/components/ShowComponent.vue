@@ -20,7 +20,6 @@
                                 ></textarea>
                             </div>
                             <div class="form-group row border-bottom pt-2 pb-2">
-                                <label for="title" class="col-sm-3 col-form-label">画像</label>
                                 <div class="container">
                                     <div class="row">
                                         <div
