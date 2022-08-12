@@ -19,6 +19,7 @@ class TubuyakiController extends Controller
     public function index()
     {
         $tubuyakies = Tubuyaki::with('images')
+            ->orderBy('created_at', 'desc')
             ->get()
             ->toJson(JSON_PRETTY_PRINT);
 
