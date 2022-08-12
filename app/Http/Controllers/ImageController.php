@@ -22,6 +22,8 @@ class ImageController extends Controller
         try {
             $image_pathes = DB::transaction(function () use ($request) {
 
+                Log::debug($request->all());
+
                 $result = collect();
                 $files = $request->file("images");
 

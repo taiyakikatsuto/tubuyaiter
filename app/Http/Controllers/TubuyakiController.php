@@ -38,9 +38,9 @@ class TubuyakiController extends Controller
         try {
             DB::transaction(function () use ($request) {
 
+                Log::debug($request->all());
                 $tubuyaki = new Tubuyaki();
                 $tubuyaki->fill($request->all());
-                Log::info($request->all());
                 $tubuyaki->saveOrFail();
 
                 // 画像が添付されている場合画像も保存する
@@ -76,7 +76,7 @@ class TubuyakiController extends Controller
             ->find($id)
             ->toJson(JSON_PRETTY_PRINT);
 
-        Log::debug($tubuyaki);
+        Log::debug('show' . $tubuyaki);
 
         return response($tubuyaki, 200);
     }
@@ -93,10 +93,10 @@ class TubuyakiController extends Controller
         try {
             DB::transaction(function () use ($request, $id) {
 
+                Log::debug($request->all());
                 $tubuyaki = Tubuyaki::find($id);
                 $tubuyaki->fill($request->all());
                 $tubuyaki->is_edited = true;
-                Log::info($request->all());
                 $tubuyaki->saveOrFail();
 
                 // 画像が添付されている場合画像も保存する
@@ -132,11 +132,14 @@ class TubuyakiController extends Controller
             $tubuyaki = Tubuyaki::find($id);
             $tubuyaki->delete();
 
+            Log::debug('delete' . $tubuyaki);
+
             return response()->json([
                 "message" => "deleted"
             ], 201);
 
         } catch (Exception $e) {
+            Log::error($e);
             return response()->json([
                 "message" => "failed"
             ], 500);
