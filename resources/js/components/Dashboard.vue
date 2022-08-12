@@ -4,10 +4,10 @@
             <div class="col-12">
                 <div class="card shadow-sm">
                     <div class="card-header">
-                        <h3>Dashboard</h3>
+                        <h3>Tubuyaiter</h3>
                     </div>
                     <div class="card-body">
-                        <label><router-link :to="{name:'list'}">一覧</router-link></label>
+                        <label><router-link :to="{name:'list'}">つぶやき一覧</router-link></label>
                     </div>
                 </div>
             </div>
