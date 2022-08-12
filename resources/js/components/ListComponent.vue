@@ -13,6 +13,22 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{ tubuyaki.contents }}</p>
+                    <div class="container">
+                        <div class="row">
+
+
+                    <div
+                        class="mb-2 col-6"
+                        v-for="(image, index) in tubuyaki.images"
+                        :key="index"
+                        >
+                        <img
+                            :src="image.file_path"
+                        />
+                    </div>
+                </div>
+            </div>
+
                 </div>
             </div>
         </div>

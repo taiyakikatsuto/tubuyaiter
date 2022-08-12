@@ -18,8 +18,12 @@ class TubuyakiController extends Controller
      */
     public function index()
     {
-        $tubuyakies = Tubuyaki::get()->toJson(JSON_PRETTY_PRINT);
-        // Log::info($tubuyakies);
+        $tubuyakies = Tubuyaki::with('images')
+            ->get()
+            ->toJson(JSON_PRETTY_PRINT);
+
+        Log::debug($tubuyakies);
+
         return response($tubuyakies, 200);
     }
 
@@ -71,7 +75,9 @@ class TubuyakiController extends Controller
         $tubuyaki = Tubuyaki::with('images')
             ->find($id)
             ->toJson(JSON_PRETTY_PRINT);
-        // Log::info($tubuyaki);
+
+        Log::debug($tubuyaki);
+
         return response($tubuyaki, 200);
     }
 
@@ -129,6 +135,7 @@ class TubuyakiController extends Controller
             return response()->json([
                 "message" => "deleted"
             ], 201);
+
         } catch (Exception $e) {
             return response()->json([
                 "message" => "failed"

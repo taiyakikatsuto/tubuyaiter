@@ -20,14 +20,17 @@
                                 ></textarea>
                             </div>
                             <div class="form-group row border-bottom pt-2 pb-2">
-                                <div v-if="showImages">
-                                    画像が出る予定
-                                    <img :src="imagePathes[0]" />
+                                <div class="container">
+                                    <div class="row">
+                                        <div
+                                            class="mb-2 col-6"
+                                            v-for="(path, index) in imagePathes"
+                                            :key="index"
+                                        >
+                                            <img :src="path" />
+                                        </div>
+                                    </div>
                                 </div>
-                                    <p
-                                        v-for="(path, index) in imagePathes"
-                                        :key="index"
-                                    >{{ path }}</p>
                                 <input
                                     @change="fileUpload"
                                     class="form-control"

@@ -21,14 +21,25 @@
                             </div>
                             <div class="form-group row border-bottom pt-2 pb-2">
                                 <label for="title" class="col-sm-3 col-form-label">画像</label>
-                                <p
-                                    v-for="(image, index) in tubuyaki.images"
-                                    :key="index"
-                                >{{ image.file_path }}</p>
-                                <p
-                                        v-for="(path, index) in imagePathes"
-                                        :key="index"
-                                    >{{ path }}</p>
+                                <div class="container">
+                                    <div class="row">
+                                        <div
+                                            class="mb-2 col-6"
+                                            v-for="(image, index) in tubuyaki.images"
+                                            :key="index"
+                                        >
+                                            <img :src="image.file_path" />
+                                        </div>
+                                        <div
+                                            class="mb-2 col-6"
+                                            v-for="(path, index) in imagePathes"
+                                            :key="index"
+                                        >
+                                            <img :src="path" />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <input
                                     @change="fileUpload"
                                     class="form-control"
