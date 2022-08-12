@@ -3,10 +3,11 @@
     <div class="row justify-content-center">
       <div class="card w-50">
         <form>
-          <div class="card-header">
+          <div class="card-header d-flex justify-content-between">
             <router-link :to="{ name: 'list' }">
               <button class="btn btn-outline-secondary">戻る</button>
             </router-link>
+            <span class="text-muted small">{{ isEdited }}</span>
           </div>
           <div class="card-body">
             <div class="row justify-content-center">
@@ -83,5 +84,10 @@ export default {
   mounted() {
     this.getTubuyaki();
   },
+  computed: {
+    isEdited: function () {
+        return this.tubuyaki.is_edited ? '編集済み' : '';
+    }
+  }
 };
 </script>

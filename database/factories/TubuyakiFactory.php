@@ -18,6 +18,7 @@ class TubuyakiFactory extends Factory
     {
         return [
             'contents' => $this->faker->realText(100),
+            'is_edited' => rand(0, 1),
         ];
     }
 }

@@ -85,6 +85,7 @@ class TubuyakiController extends Controller
         try {
             $tubuyaki = Tubuyaki::find($id);
             $tubuyaki->fill($request->all());
+            $tubuyaki->is_edited = true;
             Log::info($request->all());
             $tubuyaki->saveOrFail();
 
